@@ -1,0 +1,66 @@
+/* LUXMONT – www.luxmont.at
+   Farben und Logo wie die Startseite (start.home.luxmont.at): warmer Verlauf von oben, Gold #E3A21A / #FBD77A,
+   Karten #1c1c1c mit goldenem Hover. Schrift Montserrat (lokal, keine externen Dienste). */
+@font-face{font-family:Montserrat;src:url(fonts/montserrat.woff) format("woff");font-weight:100 900;font-display:swap}
+:root{
+  --bg:#141414;--glow:#2a2112;--card:#1c1c1c;--line:#2a2a2a;
+  --gold:#E3A21A;--gold2:#FBD77A;--text:#eaeaea;--muted:#9a9a9a;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box}
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;
+  background:radial-gradient(ellipse 90% 60% at 50% -12%,var(--glow) 0,var(--bg) 62%) fixed,var(--bg);
+  color:var(--text);font-family:Montserrat,system-ui,sans-serif;font-weight:400;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit}
+::selection{background:var(--gold);color:var(--bg)}
+
+/* Bühne: ein Bildschirm, ruhig zentriert, viel Luft */
+.buehne{flex:1;display:flex;flex-direction:column;justify-content:center;
+  width:min(760px,100%);margin:0 auto;padding:clamp(48px,10vh,120px) 24px clamp(32px,6vh,72px)}
+.kopf{margin-bottom:clamp(56px,11vh,120px)}
+.logo{display:block;width:min(460px,82vw);height:auto;margin-left:calc(min(460px,82vw) * -0.02)}
+
+.ueber{margin:0 0 14px;font-size:13px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+h1{margin:0;font-weight:300;font-size:clamp(30px,6.2vw,52px);line-height:1.12;letter-spacing:-.005em;color:var(--text);text-wrap:balance}
+.linie{display:block;width:64px;height:2px;margin:clamp(22px,4vh,32px) 0 clamp(32px,6vh,48px);
+  background:linear-gradient(90deg,var(--gold),var(--gold2));transform-origin:left}
+
+/* Aktionen als Karten, wie die Kacheln der Startseite */
+.aktionen{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.kachel{position:relative;display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:20px 52px 18px 20px;transition:border-color .2s var(--ease),transform .2s var(--ease),box-shadow .2s var(--ease)}
+.kachel .t{display:block;font-weight:600;font-size:17px;color:#fff}
+.kachel .d{display:block;margin-top:5px;font-size:14px;color:var(--muted);overflow-wrap:anywhere}
+.kachel .pfeil{position:absolute;right:20px;top:50%;translate:0 -50%;color:var(--gold);font:600 22px/1 system-ui,sans-serif;transition:translate .2s var(--ease)}
+.kachel:hover,.kachel:focus-visible{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 28px #e3a21a22}
+.kachel:hover .pfeil,.kachel:focus-visible .pfeil{translate:4px -50%}
+.kachel:active{transform:translateY(0)}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+
+.fuss{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  width:min(760px,100%);margin:0 auto;padding:20px 24px 28px;font-size:12.5px;color:#6f6f6f;letter-spacing:.04em;border-top:1px solid #1f1f1f}
+.fuss a{text-decoration:none;color:var(--muted)}
+.fuss a:hover{color:var(--gold)}
+
+/* Textseiten (Impressum) */
+.text{flex:1;width:min(720px,100%);margin:0 auto;padding:clamp(40px,8vh,96px) 24px 48px;line-height:1.7;font-size:16px;color:#d6d6d6}
+.text h1{font-size:clamp(28px,5vw,40px);margin-bottom:8px}
+.text h2{margin:40px 0 8px;font-size:13px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.text h3{margin:26px 0 6px;font-size:16px;font-weight:600;color:var(--text)}
+.text .stand{margin-top:36px;font-size:13px;color:var(--muted)}
+.text a{color:var(--gold2)}
+.zurueck{display:inline-block;margin-bottom:36px;text-decoration:none;color:var(--gold);font-size:13px;font-weight:500;letter-spacing:.2em;text-transform:uppercase}
+.zurueck:hover{color:var(--gold2)}
+
+/* Dezenter Auftritt beim Laden – nur wenn Bewegung erwünscht ist */
+@media (prefers-reduced-motion:no-preference){
+  .auftritt{animation:auf .7s var(--ease) backwards}
+  .kopf{animation-delay:.05s}.ueber{animation-delay:.18s}h1.auftritt{animation-delay:.26s}
+  .linie{animation:auf .7s var(--ease) .34s backwards,strich .9s var(--ease) .34s backwards}
+  .aktionen{animation-delay:.44s}.fuss{animation-delay:.6s}
+  @keyframes auf{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @keyframes strich{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+}
+@media (max-width:520px){.fuss{justify-content:center;text-align:center}}
